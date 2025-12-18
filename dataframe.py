@@ -1,5 +1,6 @@
 from file_handler import read_dtype, read_csv_file, write_file
 import os
+from functools import reduce
 
 class Dataframe:
     def __init__(self, data:dict, dtypes:dict):
@@ -17,15 +18,24 @@ class Dataframe:
 
     #TODO: define count_nulls()
     def count_null(self):
-        # nulls_per_col = {k:[] for k in self.dtypes.keys()}
-        pass
-        
+        nulls_per_col = {k:[] for k in self.dtypes.keys()}
+        for key in self.dtypes.keys():
+            column = self.data[key]
+            nulls_sum = reduce(lambda x, y : x + (1 if y is None else 0), column, 0)
+            nulls_per_col[key] = nulls_sum
+
+        return nulls_per_col
 
     
     #TODO: define describe()
         
-    #TODO: define fillna()   
-        
+    #TODO: define fillna()
+    def fillna(self, num_strat, cat_strat):
+        if num_strat is not None:
+            pass
+        if cat_strat is not None:
+            pass
+
     #TODO: define to_csv()
     # def head(length):
 
