@@ -1,24 +1,29 @@
-import dataframe
+# import dataframe
 
 
 
-df = dataframe.Dataframe.read_csv('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic.csv', '/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic_dtype.csv')
+# df = dataframe.Dataframe.read_csv('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic.csv', '/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic_dtype.csv')
 
 
-print(df)
+# print(df)
 
-print(df.count_null())
-
-
-# from functools import reduce
+# print(df.count_null())
 
 
+# j = {}
 
-# lst = [1, 2, 3, None, 4, None, 6, None]
+# j[0]+=1
+
+# print(j)
 
 
-# f = lambda x, y: x + (1 if y is None else 0)
+# x = 'ss'
+# print(isinstance(x, int))
 
+# f = [1, 2, 3, None, None]
 
-# x =reduce(f,lst, 0)
-# print(x)
+# print(sum(f,))
+import stats
+def x(f):
+    print(f == stats.get_col_max)
+x(stats.get_col_max)

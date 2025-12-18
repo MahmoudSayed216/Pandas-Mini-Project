@@ -1,6 +1,7 @@
 from file_handler import read_dtype, read_csv_file, write_file
 import os
 from functools import reduce
+import stats
 
 class Dataframe:
     def __init__(self, data:dict, dtypes:dict):
@@ -29,12 +30,29 @@ class Dataframe:
     
     #TODO: define describe()
         
+    def describe(self, path: str):
+
+        for key, val in self.dtypes.items():
+            if self.dtypes[key] == 'float' or self.dtypes[key] == 'int':
+                pass
+            else:
+                pass
+    
     #TODO: define fillna()
     def fillna(self, num_strat, cat_strat):
         if num_strat is not None:
-            pass
+            if num_strat not in [stats.get_col_max, stats.get_col_mean, stats.get_col_median, stats.get_col_min, stats.get_col_mode, stats.get_stat]:
+                raise ValueError("function must be within this list of function [stats.get_col_max, stats.get_col_mean, stats.get_col_median, stats.get_col_min, stats.get_col_mode, stats.get_stat]")
         if cat_strat is not None:
-            pass
+            if cat_strat != stats.get_col_mode:
+                raise ValueError("Can't compute this stat for a column of type string")
+            
+
+
+
+
+        
+
 
     #TODO: define to_csv()
     # def head(length):
