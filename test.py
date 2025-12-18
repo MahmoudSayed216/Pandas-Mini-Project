@@ -1,6 +1,7 @@
-import file_handler
+import file_handler as fh
 
 
 
-dts = file_handler.read_dtype('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic_dtype.csv')
-print(dts)
+dts = fh.read_dtype('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic_dtype.csv')
+
+fh.read_csv_file('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic.csv', dts)

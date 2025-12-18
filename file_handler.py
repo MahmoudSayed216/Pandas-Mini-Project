@@ -1,19 +1,34 @@
 import csv
 
 def read_csv_file(file_path, dtypes:dict):
-    """
-    Read a CSV file and convert each column to the specified data type.
+    data = {k:[] for k in dtypes.keys()}
+    def process_row(row: dict):
+        for key, val in row.items():
+            if dtypes[key] == 'int':
+                if row[key] == '':
+                    row[key] = None
+                else:
+                    row[key] = int(row[key])
 
-    Args:
-        file_path (str): Path to the CSV data file.
-        dtypes (dict): Dictionary mapping column names to data types ('int', 'float', 'string').
+            if dtypes[key] == 'float':
+                if row[key] == '':
+                    row[key] = None
+                else:
+                    row[key] = float(row[key])
 
-    Returns:
-        dict: A dictionary where keys are column names and values are lists of column values.
-              Missing values (empty strings) are replaced with None.
+    def add_row_to_container(row:dict):
+        for key, value in row.items():
+            data[key].append(value)
     
-    """
-    pass
+    with open(file_path) as csvfile:
+        
+        reader = csv.DictReader(csvfile)
+        i = 0
+        for row in reader:
+            process_row(row)
+            add_row_to_container(row)
+
+    return data
 
 def read_dtype(file_path):
     dtypes = {}
