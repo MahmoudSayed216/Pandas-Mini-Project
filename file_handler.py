@@ -1,3 +1,5 @@
+import csv
+
 def read_csv_file(file_path, dtypes:dict):
     """
     Read a CSV file and convert each column to the specified data type.
@@ -14,16 +16,25 @@ def read_csv_file(file_path, dtypes:dict):
     pass
 
 def read_dtype(file_path):
-    """
-    Read a CSV file containing column names and their data types.
+    dtypes = {}
+    
+    with open(file_path) as csvfile:
+        reader = csv.DictReader(csvfile)
 
-    Args:
-        file_path (str): Path to the CSV file containing column names and types.
+        for row in reader:
+            dtypes[row['column']] = row['dtype']
 
-    Returns:
-        dict: A dictionary where keys are column names and values are data types ('int', 'float', 'string').
-    """
-    pass
+
+    return dtypes
+    
+
+
+
+
+
+
+
+
             
 def write_file(file_path, data:dict):
     """
