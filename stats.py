@@ -99,11 +99,11 @@ def get_col_mode(col:list):
     mx = -1
     k = None
     for key, val in freq_map.items():
-        if freq_map[key] > mx:
+        if val > mx:
             mx = freq_map[key]
             k = key
 
-    return key
+    return k
 
     
 

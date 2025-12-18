@@ -12,11 +12,13 @@ print(df.count_nulls())
 
 df.describe('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/description1.csv')
 
-df.fillna(num_strat=stats.get_col_max, cat_strat=stats.get_col_mode)
+df.fillna(num_strat=stats.get_col_mean, cat_strat=stats.get_col_mode)
 
 df.describe('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/description2.csv')
 
 print(df)
+
+df.to_csv('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/output.csv')
 
 
 # j = {}

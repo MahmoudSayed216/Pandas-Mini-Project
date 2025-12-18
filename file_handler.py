@@ -55,14 +55,16 @@ def read_dtype(file_path):
 
             
 def write_file(file_path, data:dict):
-    """
-    Write a data dictionary to a CSV file.
 
-    Args:
-        file_path (str): Path to the output CSV file.
-        data (dict): Dictionary where keys are column names and values are lists of column values.
+    cols = [k for k in data.keys()]
+    with open(file_path, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(cols)
+        length = len(data[cols[0]])
 
-    Returns:
-        None
-    """
-    pass
+        for i in range(length):
+            row = []
+            for col in cols:
+                row.append(data[col][i])
+            writer.writerow(row)
+                

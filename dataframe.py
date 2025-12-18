@@ -108,6 +108,10 @@ class Dataframe:
 
 
     #TODO: define to_csv()
+
+    def to_csv(self, file_path):
+        write_file(file_path, self.data)
+        
     # def head(length):
 
 
