@@ -67,7 +67,7 @@ def get_col_median(col:list):
     non_nulls = [v for v in col if v is not None]
     sorted_non_nulls = sorted(non_nulls)
     length = len(sorted_non_nulls)
-    center = length/2
+    center = length//2
     if length%2 == 0:
         return (sorted_non_nulls[center] + sorted_non_nulls[center-1])/2
     
@@ -103,7 +103,7 @@ def get_col_mode(col:list):
             mx = freq_map[key]
             k = key
 
-    return freq_map[key]
+    return key
 
     
 
@@ -122,6 +122,17 @@ def get_stat(data:dict, dtypes:dict, function):
         of applying the function to that column. Only numerical columns are processed.
     """
     pass
+
+
+    stats_per_col = {k:[] for k in dtypes.keys() if dtypes[k] != 'string'}
+    stat_funcs = [get_col_max, get_col_mean, get_col_median, get_col_min, get_col_mode]
+    for key, val in dtypes.items():
+        for stat_func in stat_funcs: 
+            if dtypes[key] != 'string':
+                v = stat_func(data[key])
+                stats_per_col[key].append(v)
+
+    return stats_per_col
 
 
 

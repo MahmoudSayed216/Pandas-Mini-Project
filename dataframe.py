@@ -1,7 +1,7 @@
 from file_handler import read_dtype, read_csv_file, write_file
-import os
 from functools import reduce
 import stats
+import csv
 
 class Dataframe:
     def __init__(self, data:dict, dtypes:dict):
@@ -18,7 +18,7 @@ class Dataframe:
         return Dataframe(data = data, dtypes = dtypes)
 
     #TODO: define count_nulls()
-    def count_null(self):
+    def count_nulls(self):
         nulls_per_col = {k:[] for k in self.dtypes.keys()}
         for key in self.dtypes.keys():
             column = self.data[key]
@@ -31,13 +31,41 @@ class Dataframe:
     #TODO: define describe()
         
     def describe(self, path: str):
-
+        path+='/description.csv'
+        print(path)
+        nulls = self.count_nulls()
+        # stats_per_col = {k:[nulls[k]] for k in self.dtypes.keys()}
+        stats_per_col = []
+        stat_funcs = [(stats.get_col_max, 'max'), (stats.get_col_min, 'min'), (stats.get_col_mean, 'mean'), (stats.get_col_median, 'median'), (stats.get_col_mode, 'mode')]
+        
         for key, val in self.dtypes.items():
-            if self.dtypes[key] == 'float' or self.dtypes[key] == 'int':
-                pass
-            else:
-                pass
-    
+            col_stats = {}
+            col_stats['column'] = key
+            print(f"key: {key} \t val: {val}")
+            # print(val)
+            for stat_func in stat_funcs: 
+                if val == 'float' or val == 'int':
+                    v = stat_func[0](self.data[key])
+                    col_stats[stat_func[1]] = str(v)
+                else:
+                    col_stats[stat_func[1]] = ''
+
+            stats_per_col.append(col_stats)
+        
+        for i in range(len(stats_per_col)):
+            col_name = stats_per_col[i]['column']
+            stats_per_col[i]['nulls'] = nulls[col_name]
+            
+
+        with open(path, 'w', newline='') as csvfile:
+            fieldnames = ['column', 'nulls', 'max', 'min', 'mean', 'median', 'mode']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(stats_per_col)
+
+
+
+
     #TODO: define fillna()
     def fillna(self, num_strat, cat_strat):
         if num_strat is not None:

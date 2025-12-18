@@ -1,14 +1,15 @@
-# import dataframe
+import dataframe
 
 
 
-# df = dataframe.Dataframe.read_csv('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic.csv', '/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic_dtype.csv')
+df = dataframe.Dataframe.read_csv('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic.csv', '/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic_dtype.csv')
 
 
-# print(df)
+print(df)
 
-# print(df.count_null())
+print(df.count_nulls())
 
+df.describe('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project')
 
 # j = {}
 
@@ -23,7 +24,7 @@
 # f = [1, 2, 3, None, None]
 
 # print(sum(f,))
-import stats
-def x(f):
-    print(f == stats.get_col_max)
-x(stats.get_col_max)
+# import stats
+# def x(f):
+#     print(f == stats.get_col_max)
+# x(stats.get_col_max)

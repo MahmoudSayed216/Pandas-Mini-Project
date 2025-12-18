@@ -12,7 +12,7 @@ def main():
 
     # TODO:Write cleaned data to CSV
 
-
+    pass
 
 if __name__ == "__main__":
     main()
