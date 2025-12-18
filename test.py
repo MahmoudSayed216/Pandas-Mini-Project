@@ -1,5 +1,5 @@
-import dataframe
-import stats
+import Pandaz.dataframe as dataframe
+import Pandaz.stats as stats
 
 
 

@@ -1,6 +1,6 @@
-from file_handler import read_dtype, read_csv_file, write_file
+from Pandaz.file_handler import read_dtype, read_csv_file, write_file
 from functools import reduce
-import stats
+import Pandaz.stats as stats
 import csv
 
 class Dataframe:
