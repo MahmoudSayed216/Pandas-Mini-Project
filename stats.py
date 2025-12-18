@@ -76,7 +76,7 @@ def get_col_median(col:list):
 
     
 def get_col_mode(col:list):
-    first_non_null = h_preprocess(col)
+    # first_non_null = h_preprocess(col)
     """
     Compute the mode (most frequent value) of a column.
 

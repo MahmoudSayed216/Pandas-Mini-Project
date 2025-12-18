@@ -31,8 +31,8 @@ class Dataframe:
     #TODO: define describe()
         
     def describe(self, path: str):
-        path+='/description.csv'
-        print(path)
+        # path+='/description.csv'
+        # print(path)
         nulls = self.count_nulls()
         # stats_per_col = {k:[nulls[k]] for k in self.dtypes.keys()}
         stats_per_col = []
@@ -48,7 +48,13 @@ class Dataframe:
                     v = stat_func[0](self.data[key])
                     col_stats[stat_func[1]] = str(v)
                 else:
-                    col_stats[stat_func[1]] = ''
+                    if stat_func[1] == 'mode':
+                        print("CURRENT KEY", key)
+                        print("CURRENT FUN: ", stat_func[1])
+                        v = stat_func[0](self.data[key])
+                        col_stats[stat_func[1]] = str(v)
+                    else:     
+                        col_stats[stat_func[1]] = ''
 
             stats_per_col.append(col_stats)
         
@@ -68,13 +74,32 @@ class Dataframe:
 
     #TODO: define fillna()
     def fillna(self, num_strat, cat_strat):
+
+        numerical_columns = [k for k, v in self.dtypes.items() if v != 'string']
+        categoriacl_columns = [k for k, v in self.dtypes.items() if v == 'string']
+
         if num_strat is not None:
             if num_strat not in [stats.get_col_max, stats.get_col_mean, stats.get_col_median, stats.get_col_min, stats.get_col_mode, stats.get_stat]:
                 raise ValueError("function must be within this list of function [stats.get_col_max, stats.get_col_mean, stats.get_col_median, stats.get_col_min, stats.get_col_mode, stats.get_stat]")
+
+            else:
+                for col in numerical_columns:
+                    fill_value = num_strat(self.data[col])
+                    for i in range(len(self.data[col])):
+                        if self.data[col][i] == None:
+                            self.data[col][i] = fill_value
+
+
+
         if cat_strat is not None:
             if cat_strat != stats.get_col_mode:
                 raise ValueError("Can't compute this stat for a column of type string")
-            
+            else:
+                for col in categoriacl_columns:
+                    fill_value = cat_strat(self.data[col])
+                    for i in range(len(self.data[col])):
+                        if self.data[col][i] == None:
+                            self.data[col][i] = fill_value
 
 
 
@@ -89,11 +114,11 @@ class Dataframe:
     def __str__(self):
         s = "\t|".join([key for key in self.data.keys()])
         rows = [s]
-
+        
         for i in range(len(self.data[list(self.data.keys())[0]])):
             r = ""
             for key in self.data.keys():
-                r+=str(self.data[key][0]) + "\t|"
+                r+=str(self.data[key][i]) + "\t|"
             rows.append(r[0:-1])
         return "\n".join(rows)
     
