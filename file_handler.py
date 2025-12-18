@@ -10,11 +10,14 @@ def read_csv_file(file_path, dtypes:dict):
                 else:
                     row[key] = int(row[key])
 
-            if dtypes[key] == 'float':
+            elif dtypes[key] == 'float':
                 if row[key] == '':
                     row[key] = None
                 else:
                     row[key] = float(row[key])
+            elif dtypes[key] == 'string':
+                if row[key] == 'None' or row[key] == 'NULL' or row[key] == 'N/A' or row[key] == '' or row[key].strip() == '':
+                    row[key] = None
 
     def add_row_to_container(row:dict):
         for key, value in row.items():
@@ -23,7 +26,7 @@ def read_csv_file(file_path, dtypes:dict):
     with open(file_path) as csvfile:
         
         reader = csv.DictReader(csvfile)
-        i = 0
+        # i = 0
         for row in reader:
             process_row(row)
             add_row_to_container(row)

@@ -1,7 +1,8 @@
-import file_handler as fh
+import dataframe
 
 
 
-dts = fh.read_dtype('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic_dtype.csv')
+df = dataframe.Dataframe.read_csv('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic.csv', '/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic_dtype.csv')
 
-fh.read_csv_file('/home/mahmoud-sayed/Desktop/ITI/Python/Mini Project/Project/data/titanic.csv', dts)
+
+print(df)
